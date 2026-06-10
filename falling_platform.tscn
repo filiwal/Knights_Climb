@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d2wsnma8n51qf"]
+
+[ext_resource type="Script" uid="uid://cjvt5tmiyxwi7" path="res://falling_platform.gd" id="1_3bb5w"]
+[ext_resource type="Texture2D" uid="uid://bqdag76a6d1hu" path="res://icon.svg" id="2_5yqql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bss38"]
+size = Vector2(176, 18)
+
+[node name="FallingPlatform" type="Node2D" unique_id=1433521314]
+position = Vector2(312, 184)
+script = ExtResource("1_3bb5w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1241805716]
+scale = Vector2(1.375, 0.125)
+texture = ExtResource("2_5yqql")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1946549857]
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=903322922]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bss38")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=700594590]
+collision_layer = 1024
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TriggerArea" unique_id=763086553]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bss38")
+
+[node name="FallTimer" type="Timer" parent="." unique_id=1067950564]
+
+[node name="SelfDestructTimer" type="Timer" parent="." unique_id=1479951774]
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
+[connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timer_timeout"]
