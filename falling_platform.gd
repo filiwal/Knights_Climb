@@ -21,19 +21,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		var tween := create_tween()
 		
-		tween.tween_property(
-			self,
-			"position:y",
-			position.y + 300,
-			1.5
-		)
+		tween.tween_property(self, "position:y", position.y + 300, 1.5)
 		
-		tween.parallel().tween_property(
-			sprite,
-			"modulate:a",
-			0.0,
-			1.5
-		)
+		tween.parallel().tween_property(sprite, "modulate:a", 0.0, 1.5)
 		
 		await tween.finished
 		
